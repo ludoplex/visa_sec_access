@@ -16,9 +16,7 @@ def pci_write(bus, dev, func, offset, val):
 
 def get_npk_bdf(host_did):
     atom_dids = (0x5af0, 0x1990, 0x31f0) # BXTP, DNV, GLK
-    if (host_did >> 16) in atom_dids:
-        return (0, 0, 2)
-    return (0, 0x1f, 7)
+    return (0, 0, 2) if (host_did >> 16) in atom_dids else (0, 0x1f, 7)
 
 def print_visa_sec_access_policy():
     host_did = pci_read(0, 0, 0, 0)
